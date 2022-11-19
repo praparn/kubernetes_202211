@@ -12,6 +12,7 @@ They are set in the container spec of the `ingress-nginx-controller` Deployment 
 | `--apiserver-host`                 | Address of the Kubernetes API server. Takes the form "protocol://address:port". If not specified, it is assumed the program runs inside a Kubernetes cluster and local discovery is attempted. |
 | `--certificate-authority`          | Path to a cert file for the certificate authority. This certificate is used only when the flag --apiserver-host is specified. |
 | `--configmap`                      | Name of the ConfigMap containing custom global configurations for the controller. |
+| `--deep-inspect`                   | Enables ingress object security deep inspector. (default true) |
 | `--default-backend-service`        | Service used to serve HTTP requests not matching any known server name (catch-all). Takes the form "namespace/name". The controller configures NGINX to forward requests to the first port of this Service. |
 | `--default-server-port`            | Port to use for exposing the default server (catch-all). (default 8181) |
 | `--default-ssl-certificate`        | Secret containing a SSL certificate to be used by the default HTTPS server (catch-all). Takes the form "namespace/name". |
@@ -29,7 +30,9 @@ They are set in the container spec of the `ingress-nginx-controller` Deployment 
 | `--https-port`                     | Port to use for servicing HTTPS traffic. (default 443) |
 | `--ingress-class`                  | Name of the ingress class this controller satisfies. The class of an Ingress object is set using the field IngressClassName in Kubernetes clusters version v1.18.0 or higher or the annotation "kubernetes.io/ingress.class" (deprecated). If this parameter is not set, or set to the default value of "nginx", it will handle ingresses with either an empty or "nginx" class name. |
 | `--ingress-class-by-name`          | Define if Ingress Controller should watch for Ingress Class by Name together with Controller Class. (default false) |
+| `--internal-logger-address`        | Define the internal logger address to use when chroot images is used. (default 127.0.0.1:11514) |
 | `--kubeconfig`                     | Path to a kubeconfig file containing authorization and API server information. |
+| `--length-buckets`                 | Set of buckets which will be used for prometheus histogram metrics such as RequestLength, ResponseLength. (default `[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]`) |
 | `--log_backtrace_at`               | when logging hits line file:N, emit a stack trace (default :0) |
 | `--log_dir`                        | If non-empty, write log files in this directory |
 | `--log_file`                       | If non-empty, use this log file |
@@ -46,9 +49,11 @@ They are set in the container spec of the `ingress-nginx-controller` Deployment 
 | `--publish-service`                | Service fronting the Ingress controller. Takes the form "namespace/name". When used together with update-status, the controller mirrors the address of this service's endpoints to the load-balancer status of all Ingress objects it satisfies. |
 | `--publish-status-address`         | Customized address (or addresses, separated by comma) to set as the load-balancer status of Ingress objects this controller satisfies. Requires the update-status parameter. |
 | `--report-node-internal-ip-address`| Set the load-balancer status of Ingress objects to internal Node addresses instead of external. Requires the update-status parameter. |
+| `--report-status-classes`          | If true, report status classes in metrics (2xx, 3xx, 4xx and 5xx) instead of full status codes. (default false) |
 | `--skip_headers`                   | If true, avoid header prefixes in the log messages |
 | `--skip_log_headers`               | If true, avoid headers when opening log files |
 | `--ssl-passthrough-proxy-port`     | Port to use internally for SSL Passthrough. (default 442) |
+| `--size-buckets`                   | Set of buckets which will be used for prometheus histogram metrics such as BytesSent. (default `[10, 100, 1000, 10000, 100000, 1e+06, 1e+07]`) |
 | `--status-port`                    | Port to use for the lua HTTP endpoint configuration. (default 10246) |
 | `--status-update-interval`         | Time interval in seconds in which the status should check if an update is required. Default is 60 seconds (default 60) |
 | `--stderrthreshold`                | logs at or above this threshold go to stderr (default 2) |
@@ -56,6 +61,7 @@ They are set in the container spec of the `ingress-nginx-controller` Deployment 
 | `--sync-period`                    | Period at which the controller forces the repopulation of its local object stores. Disabled by default. |
 | `--sync-rate-limit`                | Define the sync frequency upper limit (default 0.3) |
 | `--tcp-services-configmap`         | Name of the ConfigMap containing the definition of the TCP services to expose. The key in the map indicates the external port to be used. The value is a reference to a Service in the form "namespace/name:port", where "port" can either be a port number or name. TCP ports 80 and 443 are reserved by the controller for servicing HTTP traffic. |
+| `--time-buckets`                   | Set of buckets which will be used for prometheus histogram metrics such as RequestTime, ResponseTime. (default `[0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]`) |
 | `--udp-services-configmap`         | Name of the ConfigMap containing the definition of the UDP services to expose. The key in the map indicates the external port to be used. The value is a reference to a Service in the form "namespace/name:port", where "port" can either be a port name or number. |
 | `--update-status`                  | Update the load-balancer status of Ingress objects this controller satisfies. Requires setting the publish-service parameter to a valid Service reference. (default true) |
 | `--update-status-on-shutdown`      | Update the load-balancer status of Ingress objects when the controller shuts down. Requires the update-status parameter. (default true) |

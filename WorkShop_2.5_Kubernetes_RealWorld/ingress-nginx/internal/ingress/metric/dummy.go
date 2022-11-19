@@ -18,7 +18,7 @@ package metric
 
 import (
 	"k8s.io/apimachinery/pkg/util/sets"
-	"k8s.io/ingress-nginx/internal/ingress"
+	"k8s.io/ingress-nginx/pkg/apis/ingress"
 )
 
 // NewDummyCollector returns a dummy metric collector
@@ -48,13 +48,16 @@ func (dc DummyCollector) IncCheckCount(string, string) {}
 func (dc DummyCollector) IncCheckErrorCount(string, string) {}
 
 // RemoveMetrics ...
-func (dc DummyCollector) RemoveMetrics(ingresses, endpoints []string) {}
+func (dc DummyCollector) RemoveMetrics(ingresses, endpoints, certificates []string) {}
 
 // Start ...
 func (dc DummyCollector) Start(admissionStatus string) {}
 
 // Stop ...
 func (dc DummyCollector) Stop(admissionStatus string) {}
+
+// SetSSLInfo ...
+func (dc DummyCollector) SetSSLInfo([]*ingress.Server) {}
 
 // SetSSLExpireTime ...
 func (dc DummyCollector) SetSSLExpireTime([]*ingress.Server) {}
