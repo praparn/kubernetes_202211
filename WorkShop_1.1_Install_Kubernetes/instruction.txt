@@ -83,7 +83,7 @@ libcrc32c              16384  2 nf_conntrack,ip_vs
     kubectl get pods -o wide
     kubectl expose pods webtest --target-port=443 --type=NodePort
     kubectl get svc -o wide                                               ==> Record Public Port
-    curl ifconfig.co
+    curl ifconfig.me
 
 13. Test access web endpoint by command:
     https://<Public IP>:<Port>
