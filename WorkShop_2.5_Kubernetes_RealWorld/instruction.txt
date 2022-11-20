@@ -357,5 +357,5 @@ ingress-nginx-controller-admission   ClusterIP      10.97.28.203   <none>       
 	kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_202211/master/WorkShop_2.3_Ingress_Network/webtest_deploy2.yml
 
 32. (Master) Install cert-manager for kubernetes:
-    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.yaml
+    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.10.0/cert-manager.yaml
     watch kubectl get all -n=cert-manager

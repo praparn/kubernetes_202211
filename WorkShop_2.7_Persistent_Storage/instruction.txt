@@ -12,7 +12,7 @@ Training_DockerZerotoHero_StudentGX_3   			NodePort					10.200.X.X								X.X.X.
 Part 1: Create Storage Class and Test Provision Disk
 ===================================================
 1. (Master) Install "AWS EBS CSI Driver" for operate disk with AWS by command: 
-    kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.5"
+    kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.13"
     watch kubectl get pods -n kube-system
 
 2. (Master) Create "Storage Class" for AWS and check by command:
