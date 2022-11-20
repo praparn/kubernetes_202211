@@ -45,7 +45,6 @@ libcrc32c              16384  2 nf_conntrack,ip_vs
 
 6. Initial kubernetes by command:
     sudo su -
-    kubeadm config images pull
     kubeadm init --config /home/ubuntu/kubernetes_202211/WorkShop_1.1_Install_Kubernetes/kubeadm-init-basic-containerd.yaml
     exit
 

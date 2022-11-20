@@ -38,6 +38,7 @@ scheduler:
   extraArgs:
     "feature-gates": "APIServerTracing=true,ExpandedDNSConfig=true,CSIVolumeHealth=true"
 certificatesDir: "/etc/kubernetes/pki"
+imageRepository: "registry.k8s.io"
 clusterName: "kuberneteslab"
 ---
 apiVersion: kubelet.config.k8s.io/v1beta1
