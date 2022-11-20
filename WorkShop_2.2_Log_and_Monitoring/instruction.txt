@@ -3,7 +3,7 @@ Note: This instruction will demonstrate about how to track log and monitor:
 ====================================================
 
 ====================================================
-Part1: Container Logging:
+Part1: Container Logging & Live Debugging:
 ====================================================
 1. Get command prompt for access folder workshop 2.2 by command :cd /xxxx/WorkShop_2.2_Log_and_Monitoring
 2. Check File on WorkShop
@@ -51,6 +51,39 @@ Part1: Container Logging:
     *Test by open browser: 
 	http://<Public IP>:12000
 
-12. Cleanup lab by command:
+12. Interactive Ephemeralcontainers for test connection database by command:
+    kubectl get pods
+    kubectl debug -it <maindb pods name> --image=labdocker/alpine:3.13.6-util  # Record debugger name 
+	<shell of debugger>
+	telnet maindb 3306
+	mysql -u root -p -h maindb (password: "password")		==> show databases;
+	exit
+	exit 
+
+13. Check Ephemeralcontainers with command:
+    kubectl describe pods/<maindb pods name>
+
+14. Delete Ephemeralcontainers with command:
+	kubectl delete pods/<maindb pods name>
+
+15. Cleanup lab by command:
 	kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_202211/master/WorkShop_2.2_Log_and_Monitoring/databasemodule_deploy.yml
 	kubectl delete -f https://raw.githubusercontent.com/praparn/kubernetes_202211/master/WorkShop_2.2_Log_and_Monitoring/webmodule_deploy.yml
+
+
+====================================================
+Part2: Ephemeralcontainers for injection:
+====================================================
+1. Run adhoc pods via command:
+	kubectl run away-demo --image=labdocker/north-sentinel-island:away --restart=Never
+
+2. Test direct exec to pods by command:
+	kubectl get pods
+    kubectl exec -it away-demo  sh
+
+3. Debug by Ephemeralcontainers inject to0 away pods by command:
+   kubectl debug -it away-demo --image=labdocker/alpine:3.13.6-util --target=away-demo
+
+4. Check Ephemeralcontainers and cleanup with command:
+    kubectl describe pods/away-demo
+	kubectl delete pods/away-demo
