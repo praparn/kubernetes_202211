@@ -148,8 +148,6 @@ UDP  ip-10-96-0-10.ap-southeast-1 rr
 
 ========================================  Create Dashboard =====================================================================
 11. (Master) Create Dashboard by command:
-	kubectl create namespace kubernetes-dashboard
-	kubectl create secret generic kubernetes-dashboard-certs --from-file=$HOME/kubernetes_202211/WorkShop_1.7_Resource_Management/cert -n kubernetes-dashboard
 	kubectl create -f https://raw.githubusercontent.com/praparn/kubernetes_202211/master/WorkShop_1.7_Resource_Management/dashboard-restrict.yml
 	watch kubectl get all -n=kubernetes-dashboard
 
